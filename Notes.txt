@@ -1,0 +1,1 @@
+Add sliders, choice size of squares and speed
