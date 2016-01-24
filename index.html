@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>You're a Square</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<!-- <svg id="svg1" width="500" height="500"> 
+	
+</svg> -->
+<script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+
+		// 	var x;
+		// 	var y;
+
+		// 	var bBox = svg1.getBBox();
+		// 	var rectWidth = bBox.width
+		// 	var rectHeight = bBox.height;
+		var box = d3.select("body").append("svg");
+		box.attr("width",500);
+		box.attr("height",500);
+
+		setInterval(function(){ 
+			box.append("rect").attr("x",randomPos(500))
+			.attr("y", randomPos(500))
+			.attr("height",10)
+			.attr("width",10)
+			.style("fill",function(){
+						var pos1,pos2,pos3;
+			pos1 = Math.floor((Math.random() * 255))
+			pos2 = Math.floor((Math.random() * 255))
+			pos3 = Math.floor((Math.random() * 255))
+
+			return "rgb("+pos1+","+pos2+","+pos3+")";
+			});
+
+		
+		}, 250);
+
+		// clean code
+		function randomPos(range){
+			return Math.floor((Math.random() * range) + 1);
+		}
+		function randomColour(){
+			var pos1,pos2,pos3;
+			pos1 = Math.floor((Math.random() * 255))
+			pos2 = Math.floor((Math.random() * 255))
+			pos3 = Math.floor((Math.random() * 255))
+
+			return rgb(pos1,pos2,pos3)
+		}
+	});
+
+</script>
+</body>
+</html>
