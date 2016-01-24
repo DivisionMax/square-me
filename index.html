@@ -1,60 +1,120 @@
-<!DOCTYPE html>
-<html>
-<head>
+	<!DOCTYPE html>
+	<html>
+	<head>
 	<title>You're a Square</title>
-	  <meta charset="utf-8" />
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
+	<meta charset="utf-8" />
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<link rel="stylesheet" type="text/css" href="foundation.min.css">
-</head>
-<body>
-<div id="sliders">
+	</head>
+	<body>
+	<div id="sliders" >
+	<!-- box size -->
+	<div class="row">
+	<div class="small-12 medium-6 columns">
+	<h1>Box Size</h1>
+	</div>
+	</div>
+	<div class="row">
+
+	<div class="small-10 medium-6 columns">
+	<div id="box-size" class="slider" data-slider data-start='5' data-decimal='0' data-initial-start='10' data-end='500'>
+	<span class="slider-handle"  data-slider-handle role="slider" tabindex="1" aria-controls="sliderOutput1"></span>
+	<span class="slider-fill" data-slider-fill></span>
+	</div>
+	</div>
+	<div class="small-2 medium-2 columns">
+	<input type="number" id="sliderOutput1">
+	</div>
+
+	</div>
+	<!-- interval -->
+	<div class="row">
+	<div class="small-12 medium-6 columns">
+	<h1>Interval</h1>
+	</div>
+	</div>
+	<div class="row">
+
+	<div class="small-10 medium-6 columns">
+	<div id="interval" class="slider" data-start='100' data-decimal='0' data-slider data-initial-start='500' data-end='3000'>
+
+	<span class="slider-handle"  data-slider-handle role="slider" tabindex="1" aria-controls="sliderOutput2"></span>
+	<span class="slider-fill" data-slider-fill></span>
+	</div>
+	</div>
+	<div class="small-2 medium-2 columns">
+	<input type="number" id="sliderOutput2">
+	</div>
+
+	</div>
+	</div>
+
+	<script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+
+	<script src="js/vendor/jquery.min.js"></script>
+	<script src="js/vendor/what-input.min.js"></script>
+	<script src="js/foundation.min.js"></script>
+	<script type="text/javascript">
+	$(document).foundation();
+	$(document).ready(function(){
+	var miniBoxSize = 10;
+	var interval = 250;
+
+	$('[data-slider]').on('moved.zf.slider', function(e,handle) {
+	var id = $(this).attr('id'); // The id of the element that raised the event
+	var value = $(handle).attr("aria-valuenow");
+
+	// console.log("slider");
+	// console.log(this);
+	// console.log("Valuenow" + $(handle).attr("aria-valuenow"));
+
+	if (id=="interval"){
+		interval = value;
+	}else
+	{
+		miniBoxSize =value;
+	}
+	});
+
+
+
+	var boxSize = 500;
+	var screenWidth = window.screen.availWidth;
+	var box = d3.select("body").append("svg").style("border", "1px solid #D8D8D8 ");
+	box.attr("width",screenWidth);
+	box.attr("height",boxSize);
+
+
+
+	setInterval(function(){ 
+	box.append("rect").attr("x",randomPos(boxSize))
+	.attr("y", randomPos(screenWidth))
+	.attr("height",miniBoxSize)
+	.attr("width",miniBoxSize)
+	.style("fill",function(){
+	return "rgb("+randomColour()+","+randomColour()+","+randomColour()+")";
+	});
+
+
+	}, interval);
+
+
+
+
+
 	
-</div>
-<!-- <svg id="svg1" width="500" height="500"> 
+	});
+
+	function randomPos(range){
+	return Math.floor((Math.random() * range));
+	}
+	function randomColour(){
+	return Math.floor((Math.random() * 255));
+	}
 	
-</svg> -->
-<script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-
-  <script src="js/vendor/jquery.min.js"></script>
-    <script src="js/vendor/what-input.min.js"></script>
-    <script src="js/foundation.min.js"></script>
-<script type="text/javascript" src="foundation.min.js"></script>
-<script type="text/javascript">
-  	$(document).foundation();
-
-  		var boxSize = 500;
-
-  		var box = d3.select("body").append("svg");
-		box.attr("width",boxSize);
-		box.attr("height",boxSize);
-
-		// get slider values
-		var miniBoxSize = 10;
-		var interval = 250;
-
-		setInterval(function(){ 
-			box.append("rect").attr("x",randomPos(boxSize))
-			.attr("y", randomPos(boxSize))
-			.attr("height",miniBoxSize)
-			.attr("width",miniBoxSize)
-			.style("fill",function(){
-					return "rgb("+randomColour()+","+randomColour()+","+randomColour()+")";
-			});
-
-		
-		}, interval);
-
-		// 
-		function randomPos(range){
-			return Math.floor((Math.random() * range));
-		}
-		function randomColour(){
-			return Math.floor((Math.random() * 255));
-		}
-
-</script>
-</body>
-</html>
+	</script>
+	</body>
+	</html>
