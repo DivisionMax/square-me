@@ -90,13 +90,16 @@
 
 
 	setInterval(function(){ 
-	box.append("rect").attr("x",randomPos(boxSize))
+	var block = box.append("rect").attr("x",randomPos(boxSize))
 	.attr("y", randomPos(screenWidth))
 	.attr("height",miniBoxSize)
 	.attr("width",miniBoxSize)
+	.style("opacity",0)
 	.style("fill",function(){
 	return "rgb("+randomColour()+","+randomColour()+","+randomColour()+")";
 	});
+
+	block.transition().style("opacity",1);
 
 
 	}, interval);
