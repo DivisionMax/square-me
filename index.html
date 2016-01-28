@@ -51,6 +51,13 @@
 
 	</div>
 	</div>
+	<div class="row">
+		
+		<div class="small-12 medium-6 columns">
+			<a href="#" id="start" class="button success">Start</a>
+			<a href="#" id="stop" class="button alert">Stop</a>
+		</div>
+	</div>
 
 	<script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 
@@ -80,35 +87,36 @@
 	});
 
 
-
+	var intervalObject;
 	var boxSize = 500;
 	var screenWidth = window.screen.availWidth;
 	var box = d3.select("body").append("svg").style("border", "1px solid #D8D8D8 ");
 	box.attr("width",screenWidth);
 	box.attr("height",boxSize);
 
+	document.getElementById("start").addEventListener("click",function(e){
+						e.preventDefault();
+					intervalObject = setInterval(function(){ 
+					var block = box.append("rect").attr("x",randomPos(boxSize))
+					.attr("y", randomPos(screenWidth))
+					.attr("height",miniBoxSize)
+					.attr("width",miniBoxSize)
+					.style("opacity",0)
+					.style("fill",function(){
+					return "rgb("+randomColour()+","+randomColour()+","+randomColour()+")";
+					});
+
+					block.transition().duration(200).style("opacity",1);
 
 
-	setInterval(function(){ 
-	var block = box.append("rect").attr("x",randomPos(boxSize))
-	.attr("y", randomPos(screenWidth))
-	.attr("height",miniBoxSize)
-	.attr("width",miniBoxSize)
-	.style("opacity",0)
-	.style("fill",function(){
-	return "rgb("+randomColour()+","+randomColour()+","+randomColour()+")";
-	});
-
-	block.transition().style("opacity",1);
-
-
-	}, interval);
+					}, interval);
+		});
 
 
 
-
-
-	
+	document.getElementById("stop").addEventListener("click",function(e){
+		e.preventDefault();
+		clearInterval(intervalObject);
 	});
 
 	function randomPos(range){
@@ -117,7 +125,7 @@
 	function randomColour(){
 	return Math.floor((Math.random() * 255));
 	}
-	
+	});
 	</script>
 	</body>
 	</html>
