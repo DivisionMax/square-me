@@ -69,25 +69,22 @@
 	$(document).ready(function(){
 	var miniBoxSize = 10;
 	var interval = 250;
-
-	$('[data-slider]').on('moved.zf.slider', function(e,handle) {
-	var id = $(this).attr('id'); // The id of the element that raised the event
-	var value = $(handle).attr("aria-valuenow");
-
-	// console.log("slider");
-	// console.log(this);
-	// console.log("Valuenow" + $(handle).attr("aria-valuenow"));
-
-	if (id=="interval"){
-		interval = value;
-	}else
-	{
-		miniBoxSize =value;
-	}
-	});
-
-
 	var intervalObject;
+	// if the sliders are used
+		$('[data-slider]').on('moved.zf.slider', function(e,handle) {
+		var id = $(this).attr('id'); // The id of the element that raised the event
+		var value = $(handle).attr("aria-valuenow");
+
+		if (id=="interval"){
+			interval = value;
+		}else
+		{
+			miniBoxSize =value;
+		}
+		});
+
+
+	
 	var boxSize = 500;
 	var screenWidth = window.screen.availWidth;
 	var box = d3.select("body").append("svg").style("border", "1px solid #D8D8D8 ");
@@ -97,8 +94,8 @@
 	document.getElementById("start").addEventListener("click",function(e){
 						e.preventDefault();
 					intervalObject = setInterval(function(){ 
-					var block = box.append("rect").attr("x",randomPos(boxSize))
-					.attr("y", randomPos(screenWidth))
+					var block = box.append("rect").attr("x",randomPos(screenWidth))
+					.attr("y", randomPos(boxSize))
 					.attr("height",miniBoxSize)
 					.attr("width",miniBoxSize)
 					.style("opacity",0)
