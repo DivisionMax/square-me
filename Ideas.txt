@@ -1,0 +1,2 @@
+Rather generate random sized pictures -> the popup indicates the artist information
+Add a popup to each square with a quote/saying.

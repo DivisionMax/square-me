@@ -52,7 +52,7 @@
 	</div>
 	</div>
 	<div class="row">
-		
+
 		<div class="small-12 medium-6 columns">
 			<a href="#" id="start" class="button success">Start</a>
 			<a href="#" id="stop" class="button alert">Stop</a>
@@ -84,16 +84,23 @@
 		});
 
 
-	
+
 	var boxSize = 500;
-	var screenWidth = window.screen.availWidth;
-	var box = d3.select("body").append("svg").style("border", "1px solid #D8D8D8 ");
-	box.attr("width",screenWidth);
-	box.attr("height",boxSize);
+	var screenWidth = $(window).width();
+  var box = d3.select("body").append("svg")
+  box.style("border", "1px solid #D8D8D8 ");
+  box.attr("width",screenWidth);
+  box.attr("height",boxSize);
+  $( window ).resize(function() {
+    screenWidth = $(window).width();
+    box.attr("width",screenWidth);
+  });
+
+
 
 	document.getElementById("start").addEventListener("click",function(e){
 						e.preventDefault();
-					intervalObject = setInterval(function(){ 
+					intervalObject = setInterval(function(){
 					var block = box.append("rect").attr("x",randomPos(screenWidth))
 					.attr("y", randomPos(boxSize))
 					.attr("height",miniBoxSize)
