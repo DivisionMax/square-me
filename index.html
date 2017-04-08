@@ -51,6 +51,47 @@
 
 	</div>
 	</div>
+	<!--Radius X-->
+	<div class="row">
+	<div class="small-12 medium-6 columns">
+	<h1>Radius X</h1>
+	</div>
+	</div>
+	<div class="row">
+
+	<div class="small-10 medium-6 columns">
+	<div id="radius-x" class="slider" data-start='0' data-decimal='0' data-slider data-initial-start='0' data-end='100'>
+
+	<span class="slider-handle"  data-slider-handle role="slider" tabindex="1" aria-controls="sliderOutput3"></span>
+	<span class="slider-fill" data-slider-fill></span>
+	</div>
+	</div>
+	<div class="small-2 medium-2 columns">
+	<input type="number" id="sliderOutput3">
+	</div>
+
+	</div>
+	<!--Radius Y-->
+		<div class="row">
+	<div class="small-12 medium-6 columns">
+	<h1>Radius Y</h1>
+	</div>
+	</div>
+	<div class="row">
+
+	<div class="small-10 medium-6 columns">
+	<div id="radius-y" class="slider" data-start='0' data-decimal='0' data-slider data-initial-start='0' data-end='100'>
+
+	<span class="slider-handle"  data-slider-handle role="slider" tabindex="1" aria-controls="sliderOutput4"></span>
+	<span class="slider-fill" data-slider-fill></span>
+	</div>
+	</div>
+	<div class="small-2 medium-2 columns">
+	<input type="number" id="sliderOutput4">
+	</div>
+
+	</div>
+
 	<div class="row">
 
 		<div class="small-12 medium-6 columns">
@@ -71,6 +112,8 @@
 		// TODO: Add other shapes
 
 	var miniBoxSize = 10;
+	var radiusX = 0;
+	var radiusY = 0;
 	var interval = 250;
 	var intervalObject;
 	// if the sliders are used
@@ -78,13 +121,20 @@
 		var id = $(this).attr('id'); // The id of the element that raised the event
 		var value = $(handle).attr("aria-valuenow");
 
-		if (id=="interval"){
-			interval = value;
-		}else
-		{
-			miniBoxSize =value;
-		}
-		});
+		switch(id) {
+    case "interval":
+		interval = value;
+        break;
+    case "box-size":
+		miniBoxSize = value;
+        break;
+	case "radius-x":
+        radiusX = value;
+        break;
+	case "radius-y":
+        radiusY = value;
+        break;	
+}});
 
 
 
@@ -106,8 +156,10 @@
 					intervalObject = setInterval(function(){
 					var block = box.append("rect").attr("x",randomPos(screenWidth))
 					.attr("y", randomPos(boxSize))
-					.attr("height",miniBoxSize)
-					.attr("width",miniBoxSize)
+					.attr("height", miniBoxSize)
+					.attr("width", miniBoxSize)
+					.attr("rx", radiusX)
+					.attr("ry", radiusY)
 					.style("opacity",0)
 					.style("fill",function(){
 					return "rgb("+randomColour()+","+randomColour()+","+randomColour()+")";
