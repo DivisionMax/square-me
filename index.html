@@ -24,7 +24,7 @@
 		</div>
 		<!--Interval Heading-->
 		<div class="small-12 medium-6 columns">
-		<h2>Interval</h2>
+		<h2>Interval (sec)</h2>
 		</div>
 	</div>
 	
@@ -41,7 +41,7 @@
 		</div>
 <!--Interval Slider-->
 		<div class="small-10 medium-4 columns">
-		<div id="interval" class="slider" data-start='100' data-decimal='0' data-slider data-initial-start='500' data-end='3000'>
+		<div id="interval" class="slider" data-start='0' data-decimal='2' data-slider data-initial-start='1' data-end='5'>
 
 		<span class="slider-handle"  data-slider-handle role="slider" tabindex="1" aria-controls="sliderOutput2"></span>
 		<span class="slider-fill" data-slider-fill></span>
@@ -114,7 +114,7 @@
 	var miniBoxSize = 10;
 	var radiusX = 0;
 	var radiusY = 0;
-	var interval = 250;
+	var interval = 1000;
 	var intervalObject;
 	// if the sliders are used
 		$('[data-slider]').on('moved.zf.slider', function(e,handle) {
@@ -123,8 +123,11 @@
 
 		switch(id) {
     case "interval":
-		interval = value;
-        break;
+		interval = value*1000; //Convert secs to ms
+        console.log("ms -> " + interval);
+		clearCustomInterval();
+		setCustomInterval();
+		break;
     case "box-size":
 		miniBoxSize = value;
         break;
@@ -153,6 +156,10 @@
 
 	document.getElementById("start").addEventListener("click",function(e){
 						e.preventDefault();
+setCustomInterval();
+		});
+
+		function setCustomInterval(){
 					intervalObject = setInterval(function(){
 					var block = box.append("rect").attr("x",randomPos(screenWidth))
 					.attr("y", randomPos(boxSize))
@@ -166,16 +173,16 @@
 					});
 
 					block.transition().duration(200).style("opacity",1);
+					}, interval);			
+		}
 
-
-					}, interval);
-		});
-
-
+		function clearCustomInterval(){
+			clearInterval(intervalObject);	
+		}
 
 	document.getElementById("stop").addEventListener("click",function(e){
 		e.preventDefault();
-		clearInterval(intervalObject);
+		clearCustomInterval();
 	});
 
 	function randomPos(range){
