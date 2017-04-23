@@ -13,12 +13,17 @@
 	<div id="sliders" >
 	<!-- box size -->
 	<div class="row">
-	<div class="small-12 medium-6 columns">
-	<h1>Box Size</h1>
+	<div class="small-12 medium-12 columns">
+	<h1>Square Me (Or You)</h1>
 	</div>
 	</div>
 	<div class="row">
-
+	<div class="small-12 medium-6 columns">
+	<h2>Box Size</h2>
+	</div>
+	</div>
+	
+	<div class="row">
 	<div class="small-10 medium-6 columns">
 	<div id="box-size" class="slider" data-slider data-start='5' data-decimal='0' data-initial-start='10' data-end='500'>
 	<span class="slider-handle"  data-slider-handle role="slider" tabindex="1" aria-controls="sliderOutput1"></span>
@@ -33,7 +38,7 @@
 	<!-- interval -->
 	<div class="row">
 	<div class="small-12 medium-6 columns">
-	<h1>Interval</h1>
+	<h2>Interval</h2>
 	</div>
 	</div>
 	<div class="row">
@@ -54,7 +59,7 @@
 	<!--Radius X-->
 	<div class="row">
 	<div class="small-12 medium-6 columns">
-	<h1>Radius X</h1>
+	<h2>Radius X</h2>
 	</div>
 	</div>
 	<div class="row">
@@ -74,7 +79,7 @@
 	<!--Radius Y-->
 		<div class="row">
 	<div class="small-12 medium-6 columns">
-	<h1>Radius Y</h1>
+	<h2>Radius Y</h2>
 	</div>
 	</div>
 	<div class="row">
@@ -99,7 +104,11 @@
 			<a href="#" id="stop" class="button alert">Stop</a>
 		</div>
 	</div>
+<div class="row">
+	<div id="svg-container" class="small-12 medium-12 columns">
 
+	</div>
+</div>
 	<script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 
 	<script src="js/vendor/jquery.min.js"></script>
@@ -140,9 +149,9 @@
 
 	var boxSize = 500;
 	var screenWidth = $(window).width();
-  var box = d3.select("body").append("svg")
+  var box = d3.select("#svg-container").append("svg")
   box.style("border", "1px solid #D8D8D8 ");
-  box.attr("width",screenWidth);
+  box.attr("width","100%");
   box.attr("height",boxSize);
   $( window ).resize(function() {
     screenWidth = $(window).width();
